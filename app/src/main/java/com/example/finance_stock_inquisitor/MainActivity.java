@@ -14,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // API is Alpha Vantage, used from https://www.alphavantage.co/documentation/.
-        //Gson gson = new Gson();
+        
+
+
     }
 }
