@@ -72,7 +72,8 @@ public class StockPredictingActivity extends AppCompatActivity {
     }
 
     /**
-     * Gets the stock data to be used for forecasting.
+     * Gets the opening prices of a particular stock for the last n days to be used for forecasting.
+     * Depending on the call type n can be 100 or much more.
      */
     private void getStockData() {
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -86,9 +87,12 @@ public class StockPredictingActivity extends AppCompatActivity {
                    public void onResponse(JSONObject response) {
                        try {
                            JSONObject dailyStockPrices = response.getJSONObject(DAILY_KEY);
+
+                           // Dates from today till last n days for stock prices.
                            JSONArray dates = dailyStockPrices.names();
 
                            for (int i = 0; i < dates.length(); i++) {
+                               // Dates are moving so iterate over the unknown dates.
                                String dateKey = dates.getString (i);
 
                                JSONObject stockPricesOnDay
