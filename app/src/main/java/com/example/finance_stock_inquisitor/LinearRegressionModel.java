@@ -8,55 +8,55 @@ public class LinearRegressionModel implements PredictionModel {
     //TODO: Write implementations for following methods.
     /**
      * Based on Linear Regression, calculates forecasts stock prices over the next 6 hours.
-     * @param finData - The response from API on stock price data.
+     * @param stockPrices - The response from API on stock price data.
      * @return List of predicted stock prices for the next 6 hours.
      */
-    public ArrayList<Double> getNext6HourPredictedPrices(Gson finData) {
+    public ArrayList<Double> getNext6HourPredictedPrices(ArrayList<Double> stockPrices) {
         return null;
     }
 
     /**
      * Based on Linear Regression, calculates forecasts stock prices over the next 12 hours.
-     * @param finData - The response from API on stock price data.
+     * @param stockPrices - The response from API on stock price data.
      * @return List of predicted stock prices for the next 12 hours.
      */
-    public ArrayList<Double> getNext12HourPredictedPrices(Gson finData) {
+    public ArrayList<Double> getNext12HourPredictedPrices(ArrayList<Double> stockPrices) {
         return null;
     }
 
     /**
      * Based on Linear Regression, calculates forecasts stock prices over the next 1 day.
-     * @param finData - The response from API on stock price data.
+     * @param stockPrices - The response from API on stock price data.
      * @return List of predicted stock prices for the next 1 day.
      */
-    public ArrayList<Double> getNext1DayPredictedPrices(Gson finData) {
+    public ArrayList<Double> getNext1DayPredictedPrices(ArrayList<Double> stockPrices) {
         return null;
     }
 
     /**
      * Based on Linear Regression, calculates forecasts stock prices over the next 1 week.
-     * @param finData - The response from API on stock price data.
+     * @param stockPrices - The response from API on stock price data.
      * @return List of predicted stock prices for the next 1 week.
      */
-    public ArrayList<Double> getNext1WeekPredictedPrices(Gson finData) {
+    public ArrayList<Double> getNext1WeekPredictedPrices(ArrayList<Double> stockPrices) {
         return null;
     }
 
     /**
      * Based on Linear Regression, calculates forecasts stock prices over the next 1 month.
-     * @param finData - The response from API on stock price data.
+     * @param stockPrices - The response from API on stock price data.
      * @return List of predicted stock prices for the next 1 month.
      */
-    public ArrayList<Double> getNext1MonthPredictedPrices(Gson finData) {
+    public ArrayList<Double> getNext1MonthPredictedPrices(ArrayList<Double> stockPrices) {
         return null;
     }
 
     /**
      * Based on Linear Regression, calculates forecasts stock prices over the of next 3 months.
-     * @param finData - The response from API on stock price data.
+     * @param stockPrices - The response from API on stock price data.
      * @return List of predicted stock prices for the next 3 months.
      */
-    public ArrayList<Double> getNext3MonthPredictedPrices(Gson finData) {
+    public ArrayList<Double> getNext3MonthPredictedPrices(ArrayList<Double> stockPrices) {
         return null;
     }
 }

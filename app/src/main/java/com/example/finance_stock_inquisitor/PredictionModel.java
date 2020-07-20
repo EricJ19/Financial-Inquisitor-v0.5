@@ -17,43 +17,43 @@ public interface PredictionModel {
 
     /**
      * Based on model, calculates forecasts stock prices over the next 6 hours.
-     * @param finData - The response from API on stock price data.
+     * @param stockPrices - The response from API on stock price data.
      * @return List of predicted stock prices for the next 6 hours.
      */
-    ArrayList<Double> getNext6HourPredictedPrices(Gson finData);
+    ArrayList<Double> getNext6HourPredictedPrices(ArrayList<Double> stockPrices);
 
     /**
      * Based on model, calculates forecasts stock prices over the next 12 hours.
-     * @param finData - The response from API on stock price data.
+     * @param stockPrices - The response from API on stock price data.
      * @return List of predicted stock prices for the next 12 hours.
      */
-    ArrayList<Double> getNext12HourPredictedPrices(Gson finData);
+    ArrayList<Double> getNext12HourPredictedPrices(ArrayList<Double> stockPrices);
 
     /**
      * Based on model, calculates forecasts stock prices over the next 1 day.
-     * @param finData - The response from API on stock price data.
+     * @param stockPrices - The response from API on stock price data.
      * @return List of predicted stock prices for the next 1 day.
      */
-    ArrayList<Double> getNext1DayPredictedPrices(Gson finData);
+    ArrayList<Double> getNext1DayPredictedPrices(ArrayList<Double> stockPrices);
 
     /**
      * Based on model, calculates forecasts stock prices over the next 1 week.
-     * @param finData - The response from API on stock price data.
+     * @param stockPrices - The response from API on stock price data.
      * @return List of predicted stock prices for the next 1 week.
      */
-    ArrayList<Double> getNext1WeekPredictedPrices(Gson finData);
+    ArrayList<Double> getNext1WeekPredictedPrices(ArrayList<Double> stockPrices);
 
     /**
      * Based on model, calculates forecasts stock prices over the next 1 month.
-     * @param finData - The response from API on stock price data.
+     * @param stockPrices - The response from API on stock price data.
      * @return List of predicted stock prices for the next 1 month.
      */
-    ArrayList<Double> getNext1MonthPredictedPrices(Gson finData);
+    ArrayList<Double> getNext1MonthPredictedPrices(ArrayList<Double> stockPrices);
 
     /**
      * Based on model, calculates forecasts stock prices over the of next 3 months.
-     * @param finData - The response from API on stock price data.
+     * @param stockPrices - The response from API on stock price data.
      * @return List of predicted stock prices for the next 3 months.
      */
-    ArrayList<Double> getNext3MonthPredictedPrices(Gson finData);
+    ArrayList<Double> getNext3MonthPredictedPrices(ArrayList<Double> stockPrices);
 }
