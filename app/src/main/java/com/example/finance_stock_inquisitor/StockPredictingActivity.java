@@ -59,6 +59,8 @@ public class StockPredictingActivity extends AppCompatActivity {
         openingPrices = new ArrayList<>();
         getStockData = findViewById(R.id.get_stock_data);
 
+        setGraphDimensions();
+
         getStockData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,6 +71,22 @@ public class StockPredictingActivity extends AppCompatActivity {
                 openingPrices.clear();
             }
         });
+    }
+
+    /**
+     * Sets the scale of the graph.
+     * Called onCreate.
+     */
+    private void setGraphDimensions() {
+        GraphView stockGraph = findViewById(R.id.stock_graph);
+
+        stockGraph.getViewport().setMinX(0.0);
+        stockGraph.getViewport().setMaxX(120.0);
+        stockGraph.getViewport().setMinY(0.0);
+        stockGraph.getViewport().setMaxY(500.0);
+
+        stockGraph.getViewport().setYAxisBoundsManual(true);
+        stockGraph.getViewport().setXAxisBoundsManual(true);
     }
 
     /**
@@ -118,18 +136,10 @@ public class StockPredictingActivity extends AppCompatActivity {
     }
 
     /**
-     * Draws the graph for actual and predicted stock prices.
+     * Draws the graph with stock data for actual and predicted stock prices.
      */
     public void drawStockGraph() {
         GraphView stockGraph = findViewById(R.id.stock_graph);
-
-        stockGraph.getViewport().setMinX(0.0);
-        stockGraph.getViewport().setMaxX(100.0);
-        stockGraph.getViewport().setMinY(0.0);
-        stockGraph.getViewport().setMaxY(500.0);
-
-        stockGraph.getViewport().setYAxisBoundsManual(true);
-        stockGraph.getViewport().setXAxisBoundsManual(true);
 
         // x - time
         // y - stock price in dollars
@@ -138,8 +148,9 @@ public class StockPredictingActivity extends AppCompatActivity {
         series = new LineGraphSeries<>();
 
         for (int i = 0; i < openingPrices.size(); i++) {
-            // 0.8 represents a time interval of 1 day.
-            x = x + 0.8;
+            // 1 unit horizontally represents 1 day.
+            double oneDayInterval = 1.0;
+            x = x + oneDayInterval;
             y = openingPrices.get(i);
 
             series.appendData(new DataPoint(x, y), true, openingPrices.size());
