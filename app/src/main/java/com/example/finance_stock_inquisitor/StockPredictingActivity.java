@@ -83,7 +83,7 @@ public class StockPredictingActivity extends AppCompatActivity {
         stockGraph.getViewport().setMinX(0.0);
         stockGraph.getViewport().setMaxX(120.0);
         stockGraph.getViewport().setMinY(0.0);
-        stockGraph.getViewport().setMaxY(500.0);
+        stockGraph.getViewport().setMaxY(350);
 
         stockGraph.getViewport().setYAxisBoundsManual(true);
         stockGraph.getViewport().setXAxisBoundsManual(true);
