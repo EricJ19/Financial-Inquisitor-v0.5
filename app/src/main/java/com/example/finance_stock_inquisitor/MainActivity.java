@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        predictStocks = (Button) findViewById(R.id.pred_stocks);
+        predictStocks = findViewById(R.id.pred_stocks);
         predictStocks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
