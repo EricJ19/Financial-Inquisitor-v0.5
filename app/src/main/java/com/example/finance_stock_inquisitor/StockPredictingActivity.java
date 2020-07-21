@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,6 +21,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -51,6 +53,10 @@ public class StockPredictingActivity extends AppCompatActivity {
      * Button to call API and put stock data into openingPrices.
      */
     private Button getStockData;
+    /**
+     * User inputs for specific stock.
+     */
+    private EditText stockSymbol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +64,7 @@ public class StockPredictingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_stock_predicting);
         openingPrices = new ArrayList<>();
         getStockData = findViewById(R.id.get_stock_data);
+        stockSymbol = findViewById(R.id.stock_symbol);
 
         setGraphDimensions();
 
@@ -94,10 +101,11 @@ public class StockPredictingActivity extends AppCompatActivity {
      * Depending on the call type n can be 100 or much more.
      */
     private void getStockData() {
+        String userInputTicker = getFormattedUserInputTicker();
         RequestQueue queue = Volley.newRequestQueue(this);
         String url
-                = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey="
-                + API_KEY;
+                = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="
+                + userInputTicker + "&apikey=" + API_KEY;
 
        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                new Response.Listener<JSONObject>() {
@@ -136,10 +144,21 @@ public class StockPredictingActivity extends AppCompatActivity {
     }
 
     /**
+     * Retrieves the input of ticker. Used to unique API calls.
+     * @return - the user input in stockSymbol EditText.
+     */
+    private String getFormattedUserInputTicker() {
+        return stockSymbol.getText().toString().toUpperCase();
+    }
+
+    /**
      * Draws the graph with stock data for actual and predicted stock prices.
      */
     public void drawStockGraph() {
         GraphView stockGraph = findViewById(R.id.stock_graph);
+
+        // Remove previous plots.
+        stockGraph.removeAllSeries();
 
         // x - time
         // y - stock price in dollars
