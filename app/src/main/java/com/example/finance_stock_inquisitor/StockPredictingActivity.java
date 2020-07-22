@@ -162,7 +162,7 @@ public class StockPredictingActivity extends AppCompatActivity {
 
         // x - time
         // y - stock price in dollars
-        double y, x;
+        double x, y;
         x = 0.0;
         series = new LineGraphSeries<>();
 

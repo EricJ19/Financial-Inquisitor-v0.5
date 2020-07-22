@@ -68,4 +68,13 @@ public class LastValueModel implements PredictionModel {
         return null;
     }
 
+    /**
+     * Helper method to get the last value (most recent) of stock price.
+     * @param stockPrices - The response from API on stock price data.
+     * @return most recent actual stock price.
+     */
+    private double getLastValue(ArrayList<Double> stockPrices) {
+        return stockPrices.get(stockPrices.size() - 1);
+    }
+
 }
