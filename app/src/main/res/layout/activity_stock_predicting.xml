@@ -8,18 +8,18 @@
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/stock_graph"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="19dp"
-        android:layout_marginRight="19dp"
+        android:layout_width="350dp"
+        android:layout_height="421dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.714"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.765" />
 
     <Button
         android:id="@+id/get_stock_data"
@@ -28,6 +28,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp"
         android:text="Get Stock Data"
         app:layout_constraintBottom_toTopOf="@+id/stock_graph"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,6 +44,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Type Stock"
@@ -50,5 +52,34 @@
         app:layout_constraintEnd_toStartOf="@+id/get_stock_data"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/time_axis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="190dp"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="145dp"
+        android:layout_marginRight="145dp"
+        android:layout_marginBottom="22dp"
+        android:text="Time (Days)"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stock_graph" />
+
+    <TextView
+        android:id="@+id/price_axis"
+        android:layout_width="277dp"
+        android:layout_height="249dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="20dp"
+        android:rotation="270"
+        android:text="Price (Dollars)"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -88,9 +88,9 @@ public class StockPredictingActivity extends AppCompatActivity {
         GraphView stockGraph = findViewById(R.id.stock_graph);
 
         stockGraph.getViewport().setMinX(0.0);
-        stockGraph.getViewport().setMaxX(120.0);
+        stockGraph.getViewport().setMaxX(160.0);
         stockGraph.getViewport().setMinY(0.0);
-        stockGraph.getViewport().setMaxY(350);
+        stockGraph.getViewport().setMaxY(100.0);
 
         stockGraph.getViewport().setYAxisBoundsManual(true);
         stockGraph.getViewport().setXAxisBoundsManual(true);
@@ -157,10 +157,21 @@ public class StockPredictingActivity extends AppCompatActivity {
     public void drawStockGraph() {
         GraphView stockGraph = findViewById(R.id.stock_graph);
 
+        // Finds max and min price to scale graph.
+        double openingPricesMax = 0.0;
+        for (int i = 0; i < openingPrices.size(); i++) {
+            if (openingPricesMax < openingPrices.get(i)) {
+                openingPricesMax = openingPrices.get(i);
+            }
+        }
+
+        stockGraph.getViewport().setMaxY(openingPricesMax + 50.0);
+        stockGraph.getViewport().setMinY(openingPricesMax - 50.0);
+
         // Remove previous plots.
         stockGraph.removeAllSeries();
 
-        // x - time
+        // x - time in days
         // y - stock price in dollars
         double x, y;
         x = 0.0;
