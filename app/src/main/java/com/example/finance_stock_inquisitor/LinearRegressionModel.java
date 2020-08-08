@@ -6,23 +6,6 @@ import java.util.ArrayList;
 
 public class LinearRegressionModel implements PredictionModel {
     //TODO: Write implementations for following methods.
-    /**
-     * Based on Linear Regression, calculates forecasts stock prices over the next 6 hours.
-     * @param stockPrices - The response from API on stock price data.
-     * @return List of predicted stock prices for the next 6 hours.
-     */
-    public ArrayList<Double> getNext6HourPredictedPrices(ArrayList<Double> stockPrices) {
-        return null;
-    }
-
-    /**
-     * Based on Linear Regression, calculates forecasts stock prices over the next 12 hours.
-     * @param stockPrices - The response from API on stock price data.
-     * @return List of predicted stock prices for the next 12 hours.
-     */
-    public ArrayList<Double> getNext12HourPredictedPrices(ArrayList<Double> stockPrices) {
-        return null;
-    }
 
     /**
      * Based on Linear Regression, calculates forecasts stock prices over the next 1 day.

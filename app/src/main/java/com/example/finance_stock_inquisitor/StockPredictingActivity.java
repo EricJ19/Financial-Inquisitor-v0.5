@@ -145,7 +145,7 @@ public class StockPredictingActivity extends AppCompatActivity {
 
     /**
      * Retrieves the input of ticker. Used to unique API calls.
-     * @return - the user input in stockSymbol EditText.
+     * @return - the capitalized version of the user input in stockSymbol EditText.
      */
     private String getFormattedUserInputTicker() {
         return stockSymbol.getText().toString().toUpperCase();
@@ -159,14 +159,24 @@ public class StockPredictingActivity extends AppCompatActivity {
 
         // Finds max and min price to scale graph.
         double openingPricesMax = 0.0;
+        double openingPricesMin = 0.0;
         for (int i = 0; i < openingPrices.size(); i++) {
             if (openingPricesMax < openingPrices.get(i)) {
                 openingPricesMax = openingPrices.get(i);
             }
+            if (openingPricesMin > openingPrices.get(i)) {
+                openingPricesMin = openingPrices.get(i);
+            }
         }
 
         stockGraph.getViewport().setMaxY(openingPricesMax + 50.0);
-        stockGraph.getViewport().setMinY(openingPricesMax - 50.0);
+
+        // If value is less than zero, set y-axis to zero because stocks cannot be negative.
+        if (openingPricesMin - 50.0 < 0.0) {
+            stockGraph.getViewport().setMinY(0.0);
+        } else {
+            stockGraph.getViewport().setMinY(openingPricesMin - 50.0);
+        }
 
         // Remove previous plots.
         stockGraph.removeAllSeries();
