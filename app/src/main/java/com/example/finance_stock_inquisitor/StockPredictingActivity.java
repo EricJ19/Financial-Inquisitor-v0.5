@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 import static java.lang.Double.parseDouble;
 
-public class StockPredictingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class StockPredictingActivity extends AppCompatActivity {
     /**
      * The free API key used to retrieve data using Alpha Vantage from:
      * https://www.alphavantage.co/documentation/.
@@ -78,8 +78,22 @@ public class StockPredictingActivity extends AppCompatActivity implements Adapte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_predicting);
         openingPrices = new ArrayList<>();
-        getStockData = findViewById(R.id.get_stock_data);
         stockSymbol = findViewById(R.id.stock_symbol);
+
+        setGraphDimensions();
+
+        getStockData = findViewById(R.id.get_stock_data);
+        getStockData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getStockData();
+                drawStockGraph();
+
+                // Clears old prices to allow new prices to fill it.
+                openingPrices.clear();
+
+            }
+        });
 
         // Set up modelSelector spinner.
         modelSelector = findViewById(R.id.model_select);
@@ -90,7 +104,6 @@ public class StockPredictingActivity extends AppCompatActivity implements Adapte
 
         modelsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         modelSelector.setAdapter(modelsAdapter);
-        modelSelector.setOnItemSelectedListener(this);
 
         // Set up timeSelector spinner.
         timeSelector = findViewById(R.id.time_select);
@@ -101,21 +114,12 @@ public class StockPredictingActivity extends AppCompatActivity implements Adapte
 
         timesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         timeSelector.setAdapter(timesAdapter);
-        timeSelector.setOnItemSelectedListener(this);
 
         predictStockPrices = findViewById(R.id.predict_stocks);
-
-        setGraphDimensions();
-
-        getStockData.setOnClickListener(new View.OnClickListener() {
+        predictStockPrices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getStockData();
-                drawStockGraph();
-
-                // Clears old prices to allow new prices to fill it.
-                 openingPrices.clear();
-
+                showStockPrediction();
             }
         });
     }
@@ -239,13 +243,17 @@ public class StockPredictingActivity extends AppCompatActivity implements Adapte
         stockGraph.addSeries(series);
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+    /**
+     * Uses the user selected model and time period to show the forecast of prices on the graph.
+     */
+    public void showStockPrediction() {
+        drawPredictedGraph();
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
+    /**
+     * Draws the predicted stock prices based on model and time period on the graph.
+     */
+    public void drawPredictedGraph() {
 
     }
 }
