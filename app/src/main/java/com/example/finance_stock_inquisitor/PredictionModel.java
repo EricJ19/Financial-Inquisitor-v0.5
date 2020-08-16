@@ -41,5 +41,5 @@ public interface PredictionModel {
      * @param stockPrices - The response from API on stock price data.
      * @return List of predicted stock prices for the next 3 months.
      */
-    ArrayList<Double> getNext3MonthPredictedPrices(ArrayList<Double> stockPrices);
+    ArrayList<Double> getNext3MonthsPredictedPrices(ArrayList<Double> stockPrices);
 }

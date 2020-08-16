@@ -39,7 +39,7 @@ public class LinearRegressionModel implements PredictionModel {
      * @param stockPrices - The response from API on stock price data.
      * @return List of predicted stock prices for the next 3 months.
      */
-    public ArrayList<Double> getNext3MonthPredictedPrices(ArrayList<Double> stockPrices) {
+    public ArrayList<Double> getNext3MonthsPredictedPrices(ArrayList<Double> stockPrices) {
         return null;
     }
 }

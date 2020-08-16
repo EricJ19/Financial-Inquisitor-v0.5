@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Finance-Stock-Inquisitor</string>
+
+    <string-array name="models">
+        <item>Last Value</item>
+        <item>Linear Regression</item>
+    </string-array>
+
+    <string-array name="times">
+        <item>1 Day</item>
+        <item>1 Week</item>
+        <item>1 Month</item>
+        <item>3 Months</item>
+    </string-array>
 </resources>
