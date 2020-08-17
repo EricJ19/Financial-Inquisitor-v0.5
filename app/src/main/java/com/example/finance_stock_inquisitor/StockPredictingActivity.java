@@ -73,12 +73,15 @@ public class StockPredictingActivity extends AppCompatActivity {
      */
     private Button predictStockPrices;
 
+    private GraphView stockGraph;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_predicting);
         openingPrices = new ArrayList<>();
         stockSymbol = findViewById(R.id.stock_symbol);
+        stockGraph = findViewById(R.id.stock_graph);
 
         setGraphDimensions();
 
@@ -202,7 +205,6 @@ public class StockPredictingActivity extends AppCompatActivity {
      * Draws the graph with stock data for actual and predicted stock prices.
      */
     public void drawStockGraph() {
-        GraphView stockGraph = findViewById(R.id.stock_graph);
 
         // Finds max and min price to scale graph.
         double openingPricesMax = 0.0;
@@ -263,6 +265,23 @@ public class StockPredictingActivity extends AppCompatActivity {
         PredictionModel model = getModel(modelSelected);
         // Forecasts are based on the model and time selected.
         ArrayList<Double> forecastedPrices = getForecastedPrices(model, timeSelected);
+
+        // x - time in days.
+        // y - stock price in USD.
+        double x, y;
+        // 101 is the last x position not filled from the stock data.
+        x = 101;
+        series = new LineGraphSeries<>();
+
+        for (int i = 0; i < forecastedPrices.size(); i++) {
+            // 1 unit horizontally represents 1 day.
+            double oneDayInterval = 1.0;
+            x = x + oneDayInterval;
+            y = forecastedPrices.get(i);
+
+            series.appendData(new DataPoint(x, y), true, forecastedPrices.size());
+        }
+        stockGraph.addSeries(series);
     }
 
     private PredictionModel getModel(String modelSelected) {
