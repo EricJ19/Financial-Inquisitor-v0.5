@@ -2,9 +2,9 @@ package com.example.finance_stock_inquisitor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +16,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -24,11 +23,8 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-
-import static java.lang.Double.parseDouble;
 
 public class StockPredictingActivity extends AppCompatActivity {
     /**
@@ -45,9 +41,13 @@ public class StockPredictingActivity extends AppCompatActivity {
      */
     private final String OPEN_PRICE_KEY = "1. open";
     /**
-     * Stock prices to graph.
+     * Actual stock prices to graph.
      */
-    private LineGraphSeries<DataPoint> series;
+    private LineGraphSeries<DataPoint> real_series;
+    /**
+     * Forecast stock prices to graph.
+     */
+    private LineGraphSeries<DataPoint> forecast_series;
     /**
      * Contains the daily opening prices of a particular stock, from oldest to most recent.
      */
@@ -139,7 +139,7 @@ public class StockPredictingActivity extends AppCompatActivity {
         GraphView stockGraph = findViewById(R.id.stock_graph);
 
         stockGraph.getViewport().setMinX(0.0);
-        stockGraph.getViewport().setMaxX(160.0);
+        stockGraph.getViewport().setMaxX(200.0);
         stockGraph.getViewport().setMinY(0.0);
         stockGraph.getViewport().setMaxY(100.0);
 
@@ -229,14 +229,14 @@ public class StockPredictingActivity extends AppCompatActivity {
             stockGraph.getViewport().setMinY(openingPricesMin - 50.0);
         }
 
-        // Remove previous plots.
+        // Remove all previous plots.
         stockGraph.removeAllSeries();
 
         // x - time in days.
         // y - stock price in USD.
         double x, y;
         x = 0.0;
-        series = new LineGraphSeries<>();
+        real_series = new LineGraphSeries<>();
 
         for (int i = 0; i < openingPrices.size(); i++) {
             // 1 unit horizontally represents 1 day.
@@ -244,9 +244,9 @@ public class StockPredictingActivity extends AppCompatActivity {
             x = x + oneDayInterval;
             y = openingPrices.get(i);
 
-            series.appendData(new DataPoint(x, y), true, openingPrices.size());
+            real_series.appendData(new DataPoint(x, y), true, openingPrices.size());
         }
-        stockGraph.addSeries(series);
+        stockGraph.addSeries(real_series);
     }
 
     /**
@@ -268,12 +268,16 @@ public class StockPredictingActivity extends AppCompatActivity {
         // Forecasts are based on the model and time selected.
         ArrayList<Double> forecastedPrices = getForecastedPrices(model, timeSelected);
 
+        // Remove previous forecast plots.
+        stockGraph.removeSeries(forecast_series);
+
         // x - time in days.
         // y - stock price in USD.
         double x, y;
         // 101 is the last x position not filled from the stock data.
         x = 101;
-        series = new LineGraphSeries<>();
+        forecast_series = new LineGraphSeries<>();
+        forecast_series.setColor(Color.argb(100, 255, 170, 0));
 
         for (int i = 0; i < forecastedPrices.size(); i++) {
             // 1 unit horizontally represents 1 day.
@@ -281,9 +285,9 @@ public class StockPredictingActivity extends AppCompatActivity {
             x = x + oneDayInterval;
             y = forecastedPrices.get(i);
 
-            series.appendData(new DataPoint(x, y), true, forecastedPrices.size());
+            forecast_series.appendData(new DataPoint(x, y), true, forecastedPrices.size());
         }
-        stockGraph.addSeries(series);
+        stockGraph.addSeries(forecast_series);
     }
 
     private PredictionModel getModel(String modelSelected) {
