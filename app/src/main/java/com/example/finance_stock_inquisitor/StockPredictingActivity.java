@@ -73,8 +73,6 @@ public class StockPredictingActivity extends AppCompatActivity {
      */
     private Button predictStockPrices;
 
-    int counter = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,18 +86,13 @@ public class StockPredictingActivity extends AppCompatActivity {
         getStockData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: For whatever reason openingPrices only has values every other call. This
-                //  is a short-term fix to still retain the information in openingPrices.
-                //  Still have to find a longer-term solution.
-                if (counter % 2 != 0) {
-                    // Clears old prices to allow new prices to fill it.
-                    // Retains information to be used for forecasting
-                    // (unless button is clicked again).
-                    openingPrices.clear();
-                }
+                //TODO: Solve known bug->graph only shows half the time.
                 getStockData();
                 drawStockGraph();
-                counter++;
+
+                // Clears old prices to allow new prices to fill it.
+                // For some reason the data is retained when the graph is shown (half the time).
+                openingPrices.clear();
             }
         });
 
