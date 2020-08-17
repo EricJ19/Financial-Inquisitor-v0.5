@@ -72,7 +72,9 @@ public class StockPredictingActivity extends AppCompatActivity {
      * Button to predict stock prices based on past stock price data.
      */
     private Button predictStockPrices;
-
+    /**
+     * GraphView to display actual stock prices and forecast stock prices.
+     */
     private GraphView stockGraph;
 
     @Override
