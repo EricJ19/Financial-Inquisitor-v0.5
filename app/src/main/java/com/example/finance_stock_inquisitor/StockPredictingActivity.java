@@ -73,6 +73,8 @@ public class StockPredictingActivity extends AppCompatActivity {
      */
     private Button predictStockPrices;
 
+    int counter = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,12 +88,18 @@ public class StockPredictingActivity extends AppCompatActivity {
         getStockData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // TODO: For whatever reason openingPrices only has values every other call. This
+                //  is a short-term fix to still retain the information in openingPrices.
+                //  Still have to find a longer-term solution.
+                if (counter % 2 != 0) {
+                    // Clears old prices to allow new prices to fill it.
+                    // Retains information to be used for forecasting
+                    // (unless button is clicked again).
+                    openingPrices.clear();
+                }
                 getStockData();
                 drawStockGraph();
-
-                // Clears old prices to allow new prices to fill it.
-                openingPrices.clear();
-
+                counter++;
             }
         });
 
@@ -104,6 +112,7 @@ public class StockPredictingActivity extends AppCompatActivity {
 
         modelsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         modelSelector.setAdapter(modelsAdapter);
+
 
         // Set up timeSelector spinner.
         timeSelector = findViewById(R.id.time_select);
@@ -247,13 +256,48 @@ public class StockPredictingActivity extends AppCompatActivity {
      * Uses the user selected model and time period to show the forecast of prices on the graph.
      */
     public void showStockPrediction() {
-        drawPredictedGraph();
+        String modelSelected = modelSelector.getSelectedItem().toString();
+        String timeSelected = timeSelector.getSelectedItem().toString();
+        drawPredictedGraph(modelSelected, timeSelected);
     }
 
     /**
      * Draws the predicted stock prices based on model and time period on the graph.
+     * @param modelSelected the forecasting model selected by the user from modelSelector spinner.
+     * @param timeSelected the forecasting time selected by the user from timeSelector spinner.
      */
-    public void drawPredictedGraph() {
+    public void drawPredictedGraph(String modelSelected, String timeSelected) {
+        PredictionModel model = getModel(modelSelected);
+        // Forecasts are based on the model and time selected.
+        ArrayList<Double> forecastedPrices = getForecastedPrices(model, timeSelected);
+    }
 
+    private PredictionModel getModel(String modelSelected) {
+        switch (modelSelected) {
+            case "Last Value":
+                return new LastValueModel();
+            case "Linear Regression":
+                return new LinearRegressionModel();
+            default:
+                // Default is the Last Value Model which is used as a baseline for other models.
+                return new LastValueModel();
+        }
+
+    }
+
+    private ArrayList<Double> getForecastedPrices(PredictionModel model, String timeSelected) {
+        switch (timeSelected) {
+            case "1 Day":
+                return model.getNext1DayPredictedPrices(openingPrices);
+            case "1 Week":
+                return model.getNext1WeekPredictedPrices(openingPrices);
+            case "1 Month":
+                return model.getNext1MonthPredictedPrices(openingPrices);
+            case "3 Months":
+                return model.getNext3MonthsPredictedPrices(openingPrices);
+            default:
+                // Default is maximum forecast of prices.
+                return model.getNext3MonthsPredictedPrices(openingPrices);
+        }
     }
 }
