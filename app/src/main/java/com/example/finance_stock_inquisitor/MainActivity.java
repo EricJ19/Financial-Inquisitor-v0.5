@@ -7,10 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.gson.*;
-
 public class MainActivity extends AppCompatActivity {
     private Button predictStocks;
+    private Button financeNews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +23,14 @@ public class MainActivity extends AppCompatActivity {
                 openStockPredictingActivity();
             }
         });
+
+        financeNews = findViewById(R.id.finance_news);
+        financeNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openFinanceNewsActivity();
+            }
+        });
     }
 
     /**
@@ -31,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
      */
     public void openStockPredictingActivity() {
         Intent intent = new Intent(this, StockPredictingActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Changes activity from MainActivity to FinanceNews Activity.
+     */
+    public void openFinanceNewsActivity() {
+        Intent intent = new Intent(this, FinanceNewsActivity.class);
         startActivity(intent);
     }
 }
