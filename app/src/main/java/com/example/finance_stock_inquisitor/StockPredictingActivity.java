@@ -2,6 +2,7 @@ package com.example.finance_stock_inquisitor;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -77,6 +78,11 @@ public class StockPredictingActivity extends AppCompatActivity {
      */
     private GraphView stockGraph;
 
+    /**
+     * Go back to Main activity.
+     */
+    private Button predictingToMain;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,6 +133,14 @@ public class StockPredictingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showStockPrediction();
+            }
+        });
+
+        predictingToMain = findViewById(R.id.predicting_to_main);
+        predictingToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openMainActivity();
             }
         });
     }
@@ -317,5 +331,10 @@ public class StockPredictingActivity extends AppCompatActivity {
                 // Default is maximum forecast of prices.
                 return model.getNext3MonthsPredictedPrices(openingPrices);
         }
+    }
+
+    private void openMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }

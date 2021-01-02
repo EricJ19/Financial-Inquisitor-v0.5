@@ -9,8 +9,8 @@
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/stock_graph"
-        android:layout_width="350dp"
-        android:layout_height="421dp"
+        android:layout_width="346dp"
+        android:layout_height="382dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
@@ -23,29 +23,25 @@
 
     <Button
         android:id="@+id/get_stock_data"
-        android:layout_width="156dp"
-        android:layout_height="53dp"
+        android:layout_width="155dp"
+        android:layout_height="45dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
         android:text="Get Stock Data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/stock_symbol"
-        android:layout_width="126dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
+        android:layout_width="148dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Type Stock"
-        app:layout_constraintEnd_toStartOf="@+id/get_stock_data"
-        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,13 +51,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="190dp"
         android:layout_marginLeft="190dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="145dp"
         android:layout_marginRight="145dp"
-        android:layout_marginBottom="22dp"
         android:text="Time (Days)"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stock_graph" />
 
     <TextView
         android:id="@+id/price_axis"
@@ -77,14 +74,11 @@
 
     <Spinner
         android:id="@+id/model_select"
-        android:layout_width="118dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginLeft="36dp"
+        android:layout_width="122dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/time_select"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stock_symbol" />
 
@@ -93,20 +87,30 @@
         android:layout_width="83dp"
         android:layout_height="35dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
         app:layout_constraintEnd_toStartOf="@+id/predict_stocks"
         app:layout_constraintTop_toBottomOf="@+id/stock_symbol" />
 
     <Button
         android:id="@+id/predict_stocks"
-        android:layout_width="125dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
+        android:layout_width="126dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
         android:text="Predict"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stock_symbol" />
+        app:layout_constraintTop_toBottomOf="@+id/get_stock_data" />
+
+    <Button
+        android:id="@+id/predicting_to_main"
+        android:layout_width="126dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginLeft="37dp"
+        android:text="Back to Main"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/time_axis" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
