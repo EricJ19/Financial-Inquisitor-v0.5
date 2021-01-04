@@ -26,7 +26,6 @@ public class FinanceNewsActivity extends AppCompatActivity {
      * * Secondary news, smaller than main news.
      */
     private ImageView secondaryNews2;
-
     /**
      * Goes Back to main.
      */

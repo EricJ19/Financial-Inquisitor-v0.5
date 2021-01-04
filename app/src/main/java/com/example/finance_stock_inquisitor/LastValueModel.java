@@ -1,7 +1,5 @@
 package com.example.finance_stock_inquisitor;
 
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
 
 /**
